@@ -13,14 +13,15 @@ import kotlinx.android.synthetic.main.character_card.view.*
 
 class CharacterListAdapter(
     private val characters: MutableList<Character>,
-    private val context: Context
+    private val context: Context,
+    private val callback: ViewHolder.Callback
 ) : RecyclerView.Adapter<CharacterListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater
             .from(context)
             .inflate(R.layout.character_card, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, callback)
     }
 
     override fun getItemCount(): Int {
@@ -32,13 +33,19 @@ class CharacterListAdapter(
         holder.bindView(character)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, private val callback: Callback) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(character: Character) = with(itemView) {
-            val imageURI = "${character.thumbnail.path}.${character.thumbnail.extension}"
+        fun bindView(characterCard: Character) = with(itemView) {
+            val imageURI = "${characterCard.thumbnail.path}.${characterCard.thumbnail.extension}"
 
-            tvCharacterName.text = character.name
+            tvCharacterName.text = characterCard.name
             Glide.with(itemView.context).load(imageURI).into(ivCharacterImage)
+
+            itemView.setOnClickListener { callback.onClick(characterCard) }
+        }
+
+        interface Callback {
+            fun onClick(characterCard: Character)
         }
     }
 
