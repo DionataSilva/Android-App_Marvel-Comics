@@ -9,6 +9,8 @@
     <FrameLayout
         android:id="@+id/flContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        tools:listitem="@layout/character_card" />
 
 </RelativeLayout>

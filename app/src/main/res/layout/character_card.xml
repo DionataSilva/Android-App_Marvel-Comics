@@ -5,9 +5,7 @@
     android:id="@+id/cvCharacterCard"
     android:layout_width="match_parent"
     android:layout_height="90dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginRight="16dp"
+    android:layout_margin="8dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp">
 
@@ -21,7 +19,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/imageplaceholder" />
+            android:src="@drawable/imageplaceholder"/>
+
+        <View
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/gradient" />
 
         <TextView
             android:id="@+id/tvCharacterName"
