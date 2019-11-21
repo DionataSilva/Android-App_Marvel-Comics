@@ -28,10 +28,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configureLis(characters: MutableList<Character>) {
-        val recyclerView = rvCharactersList
+        rvCharactersList.adapter = CharacterListAdapter(characters, this)
 
-        recyclerView.adapter = CharacterListAdapter(characters, this)
-
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        rvCharactersList.layoutManager = GridLayoutManager(this, 2)
     }
 }

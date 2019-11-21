@@ -34,13 +34,11 @@ class CharacterListAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(character: Character) {
-            val name = itemView.tvCharacterName
-            val image = itemView.ivCharacterImage
+        fun bindView(character: Character) = with(itemView) {
             val imageURI = "${character.thumbnail.path}.${character.thumbnail.extension}"
 
-            name.text = character.name
-            Glide.with(itemView.context).load(imageURI).into(image)
+            tvCharacterName.text = character.name
+            Glide.with(itemView.context).load(imageURI).into(ivCharacterImage)
         }
     }
 
