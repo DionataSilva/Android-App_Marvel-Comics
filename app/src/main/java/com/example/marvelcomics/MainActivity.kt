@@ -2,36 +2,43 @@ package com.example.marvelcomics
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
+import android.view.MenuItem
+import android.widget.Toast
 import com.example.marvelcomics.adapters.CharacterListAdapter
-import com.example.marvelcomics.domain.Character
-import com.example.marvelcomics.domain.ComicItem
-import com.example.marvelcomics.domain.Comics
-import com.example.marvelcomics.domain.Thumbnail
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.marvelcomics.fragments.CharacterDetailFragment
+import com.example.marvelcomics.fragments.CharactersListFragment
+import kotlinx.android.synthetic.main.character_card.*
 
-class MainActivity : AppCompatActivity() {
-    private val thumbnail: Thumbnail = Thumbnail("http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784", "jpg")
-    private val comics: Comics = Comics(0, "", listOf())
-
-    private val characters: MutableList<Character> = mutableListOf(
-        Character(1, "Teste", "", thumbnail, "http://gateway.marvel.com/v1/public/characters/1011334", comics)
-    )
+class MainActivity : AppCompatActivity(), CharactersListFragment.Callback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        configureLis(characters)
+        supportFragmentManager.beginTransaction()
+            .add(R.id.flContainer, CharactersListFragment())
+            .commit()
+
     }
 
-    private fun configureLis(characters: MutableList<Character>) {
-        val recyclerView = rvCharactersList
+    override fun setNextView() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.flContainer, CharacterDetailFragment())
+            .addToBackStack(null)
+            .commit()
+    }
 
-        recyclerView.adapter = CharacterListAdapter(characters, this)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressed()
+        }
+        return true
+    }
 
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
+    override fun onBackPressed() {
+        super.onBackPressed()
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 }
