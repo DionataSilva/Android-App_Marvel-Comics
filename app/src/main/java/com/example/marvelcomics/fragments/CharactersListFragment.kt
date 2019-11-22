@@ -17,18 +17,11 @@ import kotlinx.android.synthetic.main.fragment_characters_list.*
 import java.lang.Exception
 
 class CharactersListFragment : Fragment() {
-    private val thumbnail: Thumbnail =
-        Thumbnail("http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784", "jpg")
-    private val comics: Comics = Comics(0, "", listOf())
     private val characters: MutableList<Character> = mutableListOf(
-        Character(
-            1,
-            "Teste",
-            "",
-            thumbnail,
-            "http://gateway.marvel.com/v1/public/characters/1011334",
-            comics
-        )
+        Character(),
+        Character(),
+        Character(),
+        Character()
     )
     var callback: Callback? = null
 
