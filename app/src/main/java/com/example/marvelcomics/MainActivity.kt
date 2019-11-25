@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.character_card.*
 class MainActivity : AppCompatActivity(), CharactersListFragment.Callback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

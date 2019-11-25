@@ -9,14 +9,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/detalhes"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:text="@string/detalhes">
 
         <ImageView
             android:id="@+id/ivCharacterImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:contentDescription="@string/character_image"
             android:scaleType="centerCrop"
             android:src="@drawable/imageplaceholder" />
 
@@ -26,7 +26,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/lato_bold"
-            android:text="Descrição"
+            android:text="@string/descriptionTitle"
             android:textSize="20sp" />
 
         <TextView
@@ -37,9 +37,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:fontFamily="@font/lato_regular"
-            android:text="Join 3-D MAN, CLOUD 9, KOMODO, HARDBALL, and heroes around America in the battle that will decide the fate of the planet and the future of the Initiative program. Will the Kill Krew Army win the day?
-
-"
+            android:text="@string/description"
             android:textSize="14sp" />
 
         <TextView
@@ -48,7 +46,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/lato_bold"
-            android:text="HQ's Relacionadas"
+            android:text="@string/comics"
             android:textSize="20sp" />
 
         <android.support.v7.widget.RecyclerView
