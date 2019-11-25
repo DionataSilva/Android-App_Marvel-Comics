@@ -1,13 +1,10 @@
 package com.example.marvelcomics
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.widget.Toast
-import com.example.marvelcomics.adapters.CharacterListAdapter
 import com.example.marvelcomics.fragments.CharacterDetailFragment
 import com.example.marvelcomics.fragments.CharactersListFragment
-import kotlinx.android.synthetic.main.character_card.*
 
 class MainActivity : AppCompatActivity(), CharactersListFragment.Callback {
 
