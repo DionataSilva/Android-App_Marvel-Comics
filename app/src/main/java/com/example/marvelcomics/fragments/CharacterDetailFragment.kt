@@ -7,22 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.MenuItem
 import android.widget.Toast
-
+import com.example.marvelcomics.R
 
 class CharacterDetailFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-
-
-        return inflater.inflate(
-            com.example.marvelcomics.R.layout.fragment_character_detail,
-            container,
-            false
-        )
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        inflater.inflate(R.layout.fragment_character_detail, container, false)
 }

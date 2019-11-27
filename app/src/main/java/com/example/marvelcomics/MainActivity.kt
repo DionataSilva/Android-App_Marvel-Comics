@@ -31,9 +31,7 @@ class MainActivity : AppCompatActivity(), CharactersListFragment.Callback {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> onBackPressed()
-        }
+        if (item.itemId == android.R.id.home) onBackPressed()
         return true
     }
 
