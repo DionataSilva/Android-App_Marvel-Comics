@@ -50,14 +50,16 @@ class CharactersListFragment : Fragment() {
 
     private fun configureLis(characters: MutableList<Character>) {
         context?.run {
-            rvCharactersList.adapter = CharacterListAdapter(characters, this, object : CharacterListAdapter.ViewHolder.Callback {
+            rvCharactersList.adapter = CharacterListAdapter(
+                characters,
+                this,
+                object : CharacterListAdapter.ViewHolder.Callback {
 
-                override fun onClick(characterCard: Character) {
-                    callback?.setNextView() ?: throw Exception("Deu Ruim")
+                    override fun onClick(characterCard: Character) {
+                        callback?.setNextView() ?: throw Exception("Deu Ruim")
+                    }
                 }
-
-            })
-            rvCharactersList.layoutManager = GridLayoutManager(this, 2)
+            )
         }
     }
 
