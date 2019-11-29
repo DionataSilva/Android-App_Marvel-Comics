@@ -3,8 +3,8 @@ package com.example.marvelcomics
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import com.example.marvelcomics.fragments.CharacterDetailFragment
-import com.example.marvelcomics.fragments.CharactersListFragment
+import com.example.marvelcomics.ui.characterDetail.CharacterDetailFragment
+import com.example.marvelcomics.ui.characterList.CharactersListFragment
 
 class MainActivity : AppCompatActivity(), CharactersListFragment.Callback {
 

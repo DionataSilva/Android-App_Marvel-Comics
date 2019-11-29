@@ -1,4 +1,4 @@
-package com.example.marvelcomics.domain
+package com.example.marvelcomics.data.model
 
 class ComicItem(
     val id: Int = 1,

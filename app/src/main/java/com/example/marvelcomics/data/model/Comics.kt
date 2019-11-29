@@ -1,4 +1,4 @@
-package com.example.marvelcomics.domain
+package com.example.marvelcomics.data.model
 
 class Comics(
     val available: Int = 1,

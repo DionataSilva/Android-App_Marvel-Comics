@@ -53,7 +53,11 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
+    // Lib para interceptar request http
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+
+    // Koin, lib para injeção de dependências
+    implementation 'org.koin:koin-android:1.0.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

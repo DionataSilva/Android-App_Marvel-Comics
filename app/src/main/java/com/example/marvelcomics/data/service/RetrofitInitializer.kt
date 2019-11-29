@@ -1,6 +1,6 @@
-package com.example.marvelcomics.http
+package com.example.marvelcomics.data.service
 
-import com.example.marvelcomics.services.CharacterService
+import com.example.marvelcomics.data.service.character.CharacterService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

@@ -1,4 +1,4 @@
-package com.example.marvelcomics.fragments
+package com.example.marvelcomics.ui.characterList
 
 import android.content.Context
 import android.os.Bundle
@@ -9,11 +9,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.marvelcomics.adapters.CharacterListAdapter
-import com.example.marvelcomics.domain.Character
-import com.example.marvelcomics.domain.Response
-import com.example.marvelcomics.http.CallbackResponse
-import com.example.marvelcomics.http.CharacterWebClient
+import com.example.marvelcomics.ui.characterList.recyclerView.CharacterListAdapter
+import com.example.marvelcomics.data.model.Character
+import com.example.marvelcomics.data.model.Response
+import com.example.marvelcomics.data.service.CallbackResponse
+import com.example.marvelcomics.data.service.character.CharacterWebClient
 import com.example.marvelcomics.utils.toast
 import kotlinx.android.synthetic.main.fragment_characters_list.*
 
@@ -62,7 +62,7 @@ class CharactersListFragment : Fragment() {
 
                 override fun fail(error: String) {
                     context?.run {
-                        toast(this, "Erro de api")
+                        toast("Erro de api")
                     }
                 }
             }
@@ -74,7 +74,8 @@ class CharactersListFragment : Fragment() {
             gridLayoutManager = GridLayoutManager(this, 2)
             adapter = CharacterListAdapter(
                 this,
-                object : CharacterListAdapter.ViewHolder.Callback {
+                object :
+                    CharacterListAdapter.ViewHolder.Callback {
 
                     override fun onClick(characterCard: Character) {
                         callback?.setNextView() ?: throw Exception("Erro")

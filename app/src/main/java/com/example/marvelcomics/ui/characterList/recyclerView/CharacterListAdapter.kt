@@ -1,4 +1,4 @@
-package com.example.marvelcomics.adapters
+package com.example.marvelcomics.ui.characterList.recyclerView
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.marvelcomics.R
-import com.example.marvelcomics.domain.Character
+import com.example.marvelcomics.data.model.Character
 import kotlinx.android.synthetic.main.character_card.view.*
 
 class CharacterListAdapter(
