@@ -1,6 +1,5 @@
 package com.example.marvelcomics.data.service
 
-import com.example.marvelcomics.data.service.character.CharacterService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,5 +25,5 @@ class RetrofitInitializer {
         .build()
 
 
-    fun characterService(): CharacterService = retrofit.create(CharacterService::class.java)
+    fun service(): Service = retrofit.create(Service::class.java)
 }

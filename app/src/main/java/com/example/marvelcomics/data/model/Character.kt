@@ -1,6 +1,6 @@
 package com.example.marvelcomics.data.model
 
-class Character(
+data class Character(
     val id: Int = 1,
     val name: String = "Character test",
     val description: String = "Character test",

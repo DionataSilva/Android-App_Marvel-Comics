@@ -2,4 +2,4 @@ package com.example.marvelcomics.di
 
 import org.koin.dsl.module.Module
 
-val appComponent: List<Module> = listOf()
+val appComponent: List<Module> = listOf(uiModule, domainModule, dataModule)

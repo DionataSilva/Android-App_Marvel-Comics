@@ -9,13 +9,11 @@ import com.example.marvelcomics.R
 import com.example.marvelcomics.ui.characterDetail.recyclerView.CharacterDetailAdapter
 import com.example.marvelcomics.data.model.Character
 import com.example.marvelcomics.data.model.Comics
-import com.example.marvelcomics.utils.toast
 import kotlinx.android.synthetic.main.fragment_character_detail.*
 
 class CharacterDetailFragment : Fragment() {
 
-    private val character: Character =
-        Character()
+    private val character: Character = Character()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(R.layout.fragment_character_detail, container, false)

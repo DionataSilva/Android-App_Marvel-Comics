@@ -1,5 +1,5 @@
 package com.example.marvelcomics.data.model
 
-class Response (
+data class MarvelResponseData (
     val data: Data
 )

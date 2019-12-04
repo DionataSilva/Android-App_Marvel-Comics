@@ -1,4 +1,4 @@
-package com.example.marvelcomics.utils
+package com.example.marvelcomics.extentions
 
 import android.content.Context
 import android.widget.Toast
