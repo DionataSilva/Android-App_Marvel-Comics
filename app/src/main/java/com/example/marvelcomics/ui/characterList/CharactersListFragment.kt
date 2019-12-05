@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.marvelcomics.ProgressLoader
+import com.example.marvelcomics.extentions.toast
 import com.example.marvelcomics.ui.characterList.recyclerView.CharacterListAdapter
 import com.example.marvelcomics.data.model.Character
 import com.example.marvelcomics.R.layout.*
@@ -16,31 +18,27 @@ import com.example.marvelcomics.ui.characterList.recyclerView.CharacterListViewH
 import kotlinx.android.synthetic.main.fragment_characters_list.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
+import kotlin.properties.Delegates
 
 class CharactersListFragment : Fragment(), CharacterListPresenter.View {
 
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var adapter: CharacterListAdapter
     private lateinit var callback: Callback
-    private var offset: Int = 0
-    private var charactersPage: Int = 1
-    private var totalCharacters: Int = 0
+    private var charactersPage by Delegates.notNull<Int>()
     private val presenter: CharacterListPresenter by inject { parametersOf(this) }
     private var onScroll = object : RecyclerView.OnScrollListener() {
-
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            val lastVisibleItemPosition =
-                gridLayoutManager.findLastVisibleItemPosition() + 1
-            val shouldRequest = lastVisibleItemPosition.div(charactersPage) == 20
-            val validOffset = (totalCharacters >= adapter.itemCount)
 
-            if (dy > 0 && shouldRequest && validOffset) {
-                Log.i("offset", adapter.itemCount.toString()) // TODO: Remover ao final
-                reloadCharacterList()
-                offset = adapter.itemCount
+            val lastVisibleItemPosition = gridLayoutManager.findLastVisibleItemPosition() + 1
+            val shouldRequest = lastVisibleItemPosition.div(charactersPage) == 20
+
+            if (dy > 0 && shouldRequest) {
+                presenter.loadMorCharacters()
                 charactersPage++
             } else if (dy < 0) {
-                Log.i("Scrolling", "down") // TODO: Remover ao final
+                // TODO: implementar aqui qualquer ação necessária quando a lista for scroolada para cima
+                Log.i("dy < 0", "Scrool down")
             }
         }
     }
@@ -57,31 +55,30 @@ class CharactersListFragment : Fragment(), CharacterListPresenter.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         presenter.start()
-
         configureList()
     }
 
     override fun callLoader() {
-        // TODO: not implemented
+        context?.run {
+            ProgressLoader.call(this)
+        }
     }
 
-    override fun dismissLoader() {
-        // TODO: not implemented
-    }
+    override fun dismissLoader() = ProgressLoader.dismiss()
 
-    override fun loadCharaterList(list: List<Character>) {
-        Log.e("CharaterList", list.toString()) // TODO: Remover ao final
-        adapter.addAll(list)
-    }
+    override fun loadCharaterList(list: List<Character>) = adapter.addAll(list)
 
     override fun showMessageError(errorMessage: String?) {
-        Log.e("Error", errorMessage) // TODO: Remover ao final
+        context?.run {
+            this.toast("$errorMessage")
+        }
     }
 
 
     private fun configureList() {
+        charactersPage = 1
+
         context?.run {
             gridLayoutManager = GridLayoutManager(this, 2)
 
@@ -96,10 +93,6 @@ class CharactersListFragment : Fragment(), CharacterListPresenter.View {
             rvCharactersList.layoutManager = gridLayoutManager
         }
     }
-
-    private fun getCharacterList() = presenter.getCharacterList()
-
-    private fun reloadCharacterList() = presenter.reloadList()
 
     interface Callback {
         fun setNextView()

@@ -15,4 +15,9 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <!-- ProgressDialog -->
+    <style name="ProgressDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/primaryColor</item>
+    </style>
+
 </resources>
