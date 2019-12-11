@@ -6,7 +6,10 @@ import com.bumptech.glide.Glide
 import com.example.marvelcomics.data.model.Character
 import kotlinx.android.synthetic.main.character_card.view.*
 
-class CharacterListViewHolder(itemView: View, private val callback: Callback) : RecyclerView.ViewHolder(itemView) {
+class CharacterListViewHolder(
+    itemView: View,
+    private val callback: Callback
+) : RecyclerView.ViewHolder(itemView) {
 
     fun bindView(characterCard: Character) = with(itemView) {
         val imageURI = "${characterCard.thumbnail.path}.${characterCard.thumbnail.extension}"

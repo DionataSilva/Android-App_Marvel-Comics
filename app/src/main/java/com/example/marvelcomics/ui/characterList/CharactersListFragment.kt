@@ -75,6 +75,8 @@ class CharactersListFragment : Fragment(), CharacterListPresenter.View {
         }
     }
 
+    override fun loadDetailCharacter() = callback.setNextView()
+
 
     private fun configureList() {
         charactersPage = 1
@@ -84,7 +86,7 @@ class CharactersListFragment : Fragment(), CharacterListPresenter.View {
 
             adapter = CharacterListAdapter(this, object : CharacterListViewHolder.Callback {
                 override fun onClick(characterCard: Character) {
-                    callback.setNextView()
+                    presenter.onClickList(characterCard)
                 }
             })
 

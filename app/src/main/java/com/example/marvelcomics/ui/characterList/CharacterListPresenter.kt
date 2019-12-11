@@ -2,20 +2,21 @@ package com.example.marvelcomics.ui.characterList
 
 import com.example.marvelcomics.data.model.Character
 import com.example.marvelcomics.data.model.Data
-import com.example.marvelcomics.domain.usecases.DataRequest
+import com.example.marvelcomics.domain.usecases.CharactersDataRequest
+import com.example.marvelcomics.domain.usecases.SaveCharacter
 import com.example.marvelcomics.ui.abstracts.BasePresenter
 
 class CharacterListPresenter(
     private val view: View,
-    private val dataRequest: DataRequest
+    private val charactersDataRequest: CharactersDataRequest,
+    private val saveCharacter: SaveCharacter
 ) : BasePresenter() {
 
-    private var data: Data? = null
+    private var data: Data<Character>? = null
     private var characterList = mutableListOf<Character>()
 
     private var offsetData: Int = 0
     private var totalData: Int = 0
-
 
     override fun postStart() {
         super.postStart()
@@ -24,7 +25,6 @@ class CharacterListPresenter(
     }
 
     private fun clearOnStart() {
-
         data = null
         characterList.clear()
         offsetData = 0
@@ -32,11 +32,11 @@ class CharacterListPresenter(
     }
 
     private fun loadCharacters() {
-        view.callLoader() // TODO: Implementar loader
+        view.callLoader()
 
         launchUI {
             try {
-                data = withDefault { dataRequest.invoke(offsetData) }
+                data = withDefault { charactersDataRequest.invoke(offsetData) }
                 data?.let {
                     characterList.addAll(it.results)
                     totalData = it.total
@@ -58,17 +58,18 @@ class CharacterListPresenter(
         loadCharacters()
     }
 
-    fun onClickList() {
+    fun onClickList(character: Character) {
         launchUI {
-            // TODO: Implementar
+            saveCharacter(character)
+            view.loadDetailCharacter()
         }
     }
 
-    // TODO: Implementar Funções para pegar offSet e total
     interface View {
         fun callLoader()
         fun dismissLoader()
         fun showMessageError(errorMessage: String?)
         fun loadCharaterList(list: List<Character>)
+        fun loadDetailCharacter()
     }
 }

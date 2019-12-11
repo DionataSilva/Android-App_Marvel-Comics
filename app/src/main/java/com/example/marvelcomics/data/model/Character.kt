@@ -1,22 +1,10 @@
 package com.example.marvelcomics.data.model
 
 data class Character(
-    val id: Int = 1,
-    val name: String = "Character test",
-    val description: String = "Character test",
-    val thumbnail: Thumbnail = Thumbnail(),
-    val resourceURI: String = "http://gateway.marvel.com/v1/public/characters/1011334",
-    val comics: Comics = Comics(
-        items = listOf(
-            ComicItem(),
-            ComicItem(),
-            ComicItem(),
-            ComicItem(),
-            ComicItem(),
-            ComicItem(),
-            ComicItem(),
-            ComicItem(),
-            ComicItem()
-        )
-    )
+    val id: Int,
+    val name: String,
+    val description: String,
+    val thumbnail: Thumbnail,
+    val resourceURI: String,
+    val comics: Comics
 )

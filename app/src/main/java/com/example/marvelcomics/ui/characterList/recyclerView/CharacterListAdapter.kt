@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import com.example.marvelcomics.R
 import com.example.marvelcomics.data.model.Character
 
-class CharacterListAdapter(private val context: Context, private val callback: CharacterListViewHolder.Callback) :
-    RecyclerView.Adapter<CharacterListViewHolder>() {
+class CharacterListAdapter(
+    private val context: Context,
+    private val callback: CharacterListViewHolder.Callback
+) : RecyclerView.Adapter<CharacterListViewHolder>() {
 
     private val characters: MutableList<Character> = arrayListOf()
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterListViewHolder {
 
