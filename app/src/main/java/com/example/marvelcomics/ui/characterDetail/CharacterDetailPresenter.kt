@@ -19,6 +19,7 @@ class CharacterDetailPresenter(
     private var comicsList = mutableListOf<ComicItem>()
     private var character: Character? = null
     private var characterId: Int = 0
+    private var characterName: String = ""
 
     override fun postStart() {
         super.postStart()
@@ -36,9 +37,6 @@ class CharacterDetailPresenter(
 
     private fun loadComicsList() {
         var offsetComic = 0
-
-        //var totalComics = 0
-
         view.callLoader()
 
         launchUI {
@@ -46,12 +44,13 @@ class CharacterDetailPresenter(
                 comicsData = withDefault { comicsDataRequest.invoke(offsetComic, characterId) }
                 comicsData?.let {
                     saveComicData(it)
-                    //comicsList.addAll(it.results)
-                    //totalComics = it.total
                     offsetComic = it.offset + it.limit
                     comicsList = it.results.toMutableList()
                 }
-                view.loadComicsList(comicsList)
+                if(comicsList.isNotEmpty())
+                    view.loadComicsList(comicsList)
+                else
+                    view.showMessageNoComics()
             } catch (e: Exception) {
                 view.showMessageError(e.message)
                 comicsList.clear()
@@ -66,6 +65,7 @@ class CharacterDetailPresenter(
         val imageUri = "${character?.thumbnail?.path}.${character?.thumbnail?.extension}"
         view.setUpImage(imageUri)
         character?.description?.let { view.setUpDescription(it) }
+        character?.name?.let { view.loadCharacterName(it) }
     }
 
     interface View {
@@ -73,6 +73,8 @@ class CharacterDetailPresenter(
         fun setUpImage(imageUri: String)
         fun dismissLoader()
         fun showMessageError(errorMessage: String?)
+        fun showMessageNoComics()
+        fun loadCharacterName(name: String)
         fun loadComicsList(list: MutableList<ComicItem>)
         fun setUpDescription(description: String)
     }

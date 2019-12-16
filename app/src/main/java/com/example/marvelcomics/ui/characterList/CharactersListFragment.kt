@@ -3,6 +3,7 @@ package com.example.marvelcomics.ui.characterList
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.marvelcomics.ProgressLoader
+import com.example.marvelcomics.R
 import com.example.marvelcomics.extentions.toast
 import com.example.marvelcomics.ui.characterList.recyclerView.CharacterListAdapter
 import com.example.marvelcomics.data.model.Character
@@ -55,6 +57,7 @@ class CharactersListFragment : Fragment(), CharacterListPresenter.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpNameHeader()
         presenter.start()
         configureList()
     }
@@ -77,6 +80,10 @@ class CharactersListFragment : Fragment(), CharacterListPresenter.View {
 
     override fun loadDetailCharacter() = callback.setNextView()
 
+
+    private fun setUpNameHeader() {
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
+    }
 
     private fun configureList() {
         charactersPage = 1

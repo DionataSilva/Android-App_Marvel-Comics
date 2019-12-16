@@ -2,6 +2,7 @@ package com.example.marvelcomics.ui.characterDetail
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -40,7 +41,7 @@ class CharacterDetailFragment : Fragment(), CharacterDetailPresenter.View {
         }
     }
 
-    override fun dismissLoader()= ProgressLoader.dismiss()
+    override fun dismissLoader() = ProgressLoader.dismiss()
 
     override fun showMessageError(errorMessage: String?) {
         context?.run {
@@ -60,9 +61,18 @@ class CharacterDetailFragment : Fragment(), CharacterDetailPresenter.View {
     }
 
     override fun setUpDescription(description: String) {
-        tvCharacterDescription.text = description
+        tvCharacterDescription.text =
+            if (description.isNotEmpty()) description else getString(R.string.descriptionNotAvailable)
     }
 
+    override fun showMessageNoComics() {
+        rvComicsList.visibility = View.GONE
+        tvNoComicsMessage.visibility = View.VISIBLE
+    }
+
+    override fun loadCharacterName(name: String) {
+        (activity as AppCompatActivity).supportActionBar?.title = name
+    }
 
     private fun configureList() {
         context?.run {
