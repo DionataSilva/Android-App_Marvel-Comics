@@ -19,7 +19,6 @@ class CharacterDetailPresenter(
     private var comicsList = mutableListOf<ComicItem>()
     private var character: Character? = null
     private var characterId: Int = 0
-    private var characterName: String = ""
 
     override fun postStart() {
         super.postStart()
@@ -35,8 +34,11 @@ class CharacterDetailPresenter(
         }
     }
 
+    private fun imageNotAvaileble(string: String) = string.contains("/image_not_available")
+
     private fun loadComicsList() {
         var offsetComic = 0
+        var availableLis = mutableListOf<ComicItem>()
         view.callLoader()
 
         launchUI {
@@ -47,9 +49,12 @@ class CharacterDetailPresenter(
                     offsetComic = it.offset + it.limit
                     comicsList = it.results.toMutableList()
                 }
-                if(comicsList.isNotEmpty())
+                if (comicsList.isNotEmpty()) {
+                    comicsList.removeAll { comic ->
+                        imageNotAvaileble(comic.thumbnail.path)
+                    }
                     view.loadComicsList(comicsList)
-                else
+                } else
                     view.showMessageNoComics()
             } catch (e: Exception) {
                 view.showMessageError(e.message)
