@@ -19,12 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/imageplaceholder"/>
+            android:src="@drawable/imageplaceholder" />
 
         <View
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
             android:background="@drawable/gradient" />
 
         <TextView
